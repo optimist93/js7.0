@@ -8,15 +8,15 @@ let money = prompt('Ваш бюджет на месяц?'),
 		budgetOneDay = money/30;
 
 let appData = {
-	budget: 'money',
-	timeData: 'time',
+	budget: money,
+	timeData: time,
 	expenses: {},
 	optionalExpenses: {},
 	income: [],
 	savings: false
 };
 
-appData.expenses.a1 = a2;
-appData.expenses.a3 = a4;
+appData.expenses[a1] = a2;
+appData.expenses[a3] = a4;
 
 alert('Бюджет на 1 день: ' + budgetOneDay);
