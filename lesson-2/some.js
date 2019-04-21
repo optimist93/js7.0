@@ -33,9 +33,13 @@ for (let i = 0; i < 2; i++) {
 // 			if ( (typeof(a)) === 'string' && (typeof(a)) != null && (typeof(b)) != null 
 // 				&& a != '' && b != '' && a.length < 50) {
 // 			console.log("done");
-// 			appData.expenses[a] = b;
-// 			}
 // 			i++;
+// 			appData.expenses[a] = b;
+// 			} else if (a === null || b === null || a === '' || b === '') {
+// 				alert ('Пожалуйст введите значение, не филоньте');
+// 				i--;
+				
+// 			}
 // }
 
 // let i = 0;
