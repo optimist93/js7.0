@@ -16,16 +16,13 @@ class Options {
 		";
 		div.textContent = 'тут может быть какой-то текст';
 		
-		console.log(div);
 		document.body.appendChild(div);
-		return a;
 	}
 
 }
 const square = new Options(100, 200, '#ccc');
 
-document.write(square.createDiv());
-console.log(square);
+square.createDiv();
 
 
 
