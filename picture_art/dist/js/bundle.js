@@ -166,6 +166,49 @@ module.exports = g;
 
 /***/ }),
 
+/***/ "./src/js/parts/gift.js":
+/*!******************************!*\
+  !*** ./src/js/parts/gift.js ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function gift() {
+  var gift = document.querySelector('.fixed-gift'),
+      giftPopup = document.querySelector('.popup-gift');
+
+  function showGift() {
+    giftPopup.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function hideGift() {
+    giftPopup.style.display = 'none';
+    document.body.style.overflow = '';
+    gift.style.display = 'none';
+  }
+
+  function activeGift() {
+    gift.addEventListener('click', function () {
+      showGift();
+    });
+    giftPopup.addEventListener('click', function () {
+      var target = event.target;
+
+      if (target.classList.contains('popup-close') || target.classList.contains('popup-gift')) {
+        gift.style.display = 'none';
+        hideGift();
+      }
+    });
+  }
+
+  activeGift();
+}
+
+module.exports = gift;
+
+/***/ }),
+
 /***/ "./src/js/parts/modal.js":
 /*!*******************************!*\
   !*** ./src/js/parts/modal.js ***!
@@ -185,8 +228,8 @@ function modal() {
     document.body.style.overflow = '';
   }
 
-  function activeModal(designBtn, modalName) {
-    var modalBtn = document.querySelectorAll(".".concat(designBtn)),
+  function activeModal(btn, modalName) {
+    var modalBtn = document.querySelectorAll(".".concat(btn)),
         modal = document.querySelector(".".concat(modalName));
 
     for (var i = 0; i < modalBtn.length; i++) {
@@ -194,7 +237,7 @@ function modal() {
         showModal(modal);
       });
       modal.addEventListener('click', function (event) {
-        var target = event.target; //console.log(target);
+        var target = event.target;
 
         if (target.classList.contains('popup-close') || target.classList.contains("".concat(modalName))) {
           hideModal(modal);
@@ -209,23 +252,6 @@ function modal() {
 }
 
 module.exports = modal;
-
-/***/ }),
-
-/***/ "./src/js/parts/slider.js":
-/*!********************************!*\
-  !*** ./src/js/parts/slider.js ***!
-  \********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function slider() {
-  var b = 10;
-  console.log(b);
-  console.log('еще раз привет');
-}
-
-module.exports = slider;
 
 /***/ }),
 
@@ -244,10 +270,10 @@ window.addEventListener('DOMContentLoaded', function () {
   'use strict';
 
   var modal = __webpack_require__(/*! ./parts/modal.js */ "./src/js/parts/modal.js"),
-      slider = __webpack_require__(/*! ./parts/slider.js */ "./src/js/parts/slider.js");
+      gift = __webpack_require__(/*! ./parts/gift.js */ "./src/js/parts/gift.js");
 
   modal();
-  slider();
+  gift();
 }); // -> end scripts
 
 /***/ })

@@ -10,8 +10,8 @@ function modal(){
 		document.body.style.overflow = '';
 	}
 
-	function activeModal(designBtn, modalName) {
-		let modalBtn = document.querySelectorAll(`.${designBtn}`),
+	function activeModal(btn, modalName) {
+		let modalBtn = document.querySelectorAll(`.${btn}`),
 		modal = document.querySelector(`.${modalName}`);
 		
 		for(let i = 0; i < modalBtn.length; i++) {
@@ -22,7 +22,6 @@ function modal(){
 
 			modal.addEventListener('click', (event) => {
 				let target = event.target;
-				//console.log(target);
 				if(target.classList.contains('popup-close') || target.classList.contains(`${modalName}`)){
 					hideModal(modal);
 				}

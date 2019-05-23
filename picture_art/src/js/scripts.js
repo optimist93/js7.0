@@ -4,8 +4,8 @@ window.addEventListener('DOMContentLoaded', () => {
 	'use strict';
 
 	let modal = require('./parts/modal.js'),
-		slider = require('./parts/slider.js');
+		gift = require('./parts/gift.js');
 
 	modal();
-	slider();
+	gift();
 }); // -> end scripts
