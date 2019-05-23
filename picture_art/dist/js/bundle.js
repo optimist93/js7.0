@@ -186,17 +186,17 @@ function modal() {
   }
 
   function activeModal(designBtn, modalName) {
-    var modalBtn = document.querySelectorAll(designBtn),
-        modal = document.querySelector(modalName);
+    var modalBtn = document.querySelectorAll(".".concat(designBtn)),
+        modal = document.querySelector(".".concat(modalName));
 
     for (var i = 0; i < modalBtn.length; i++) {
       modalBtn[i].addEventListener('click', function () {
         showModal(modal);
       });
       modal.addEventListener('click', function (event) {
-        var target = event.target;
+        var target = event.target; //console.log(target);
 
-        if (target.classList.contains('popup-close')) {
+        if (target.classList.contains('popup-close') || target.classList.contains("".concat(modalName))) {
           hideModal(modal);
         }
       });
@@ -204,8 +204,8 @@ function modal() {
   } //activeModal
 
 
-  activeModal('.button-design', '.popup-design');
-  activeModal('.button-consultation', '.popup-consultation');
+  activeModal('button-design', 'popup-design');
+  activeModal('button-consultation', 'popup-consultation');
 }
 
 module.exports = modal;

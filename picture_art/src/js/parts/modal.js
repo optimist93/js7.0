@@ -11,8 +11,8 @@ function modal(){
 	}
 
 	function activeModal(designBtn, modalName) {
-		let modalBtn = document.querySelectorAll(designBtn),
-		modal = document.querySelector(modalName);
+		let modalBtn = document.querySelectorAll(`.${designBtn}`),
+		modal = document.querySelector(`.${modalName}`);
 		
 		for(let i = 0; i < modalBtn.length; i++) {
 
@@ -22,14 +22,15 @@ function modal(){
 
 			modal.addEventListener('click', (event) => {
 				let target = event.target;
-				if(target.classList.contains('popup-close')){
+				//console.log(target);
+				if(target.classList.contains('popup-close') || target.classList.contains(`${modalName}`)){
 					hideModal(modal);
 				}
 			});
 		}
 	} //activeModal
 	
-	activeModal('.button-design', '.popup-design');
-	activeModal('.button-consultation', '.popup-consultation');
+	activeModal('button-design', 'popup-design');
+	activeModal('button-consultation', 'popup-consultation');
 }
 module.exports = modal;
