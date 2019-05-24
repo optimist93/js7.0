@@ -209,6 +209,38 @@ module.exports = gift;
 
 /***/ }),
 
+/***/ "./src/js/parts/hoverPicture.js":
+/*!**************************************!*\
+  !*** ./src/js/parts/hoverPicture.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function hoverPicture() {
+  var picWrap = document.querySelectorAll('.sizes-block'),
+      picItem = document.querySelectorAll('.size-img'),
+      picDescr = document.querySelectorAll('.size-descr');
+
+  var _loop = function _loop(i) {
+    picWrap[i].addEventListener('mouseover', function () {
+      picItem[i].setAttribute('src', "src/img/sizes-".concat(i + 1, "-", 1, ".png"));
+      picDescr[i].style.display = 'none';
+    });
+    picWrap[i].addEventListener('mouseout', function () {
+      picItem[i].setAttribute('src', "src/img/sizes-".concat(i + 1, ".png"));
+      picDescr[i].style.display = 'block';
+    });
+  };
+
+  for (var i = 0; i < picItem.length; i++) {
+    _loop(i);
+  }
+}
+
+module.exports = hoverPicture;
+
+/***/ }),
+
 /***/ "./src/js/parts/modal.js":
 /*!*******************************!*\
   !*** ./src/js/parts/modal.js ***!
@@ -270,10 +302,12 @@ window.addEventListener('DOMContentLoaded', function () {
   'use strict';
 
   var modal = __webpack_require__(/*! ./parts/modal.js */ "./src/js/parts/modal.js"),
-      gift = __webpack_require__(/*! ./parts/gift.js */ "./src/js/parts/gift.js");
+      gift = __webpack_require__(/*! ./parts/gift.js */ "./src/js/parts/gift.js"),
+      hoverPicture = __webpack_require__(/*! ./parts/hoverPicture.js */ "./src/js/parts/hoverPicture.js");
 
   modal();
   gift();
+  hoverPicture();
 }); // -> end scripts
 
 /***/ })
