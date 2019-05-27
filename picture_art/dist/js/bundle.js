@@ -166,6 +166,45 @@ module.exports = g;
 
 /***/ }),
 
+/***/ "./src/js/parts/accordion.js":
+/*!***********************************!*\
+  !*** ./src/js/parts/accordion.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function accordion() {
+  var accordionTitle = document.querySelectorAll('.accordion-heading'),
+      accordionDescr = document.querySelectorAll('.accordion-block');
+
+  var _loop = function _loop(i) {
+    accordionDescr[i].style.display = 'none';
+    accordionTitle[i].addEventListener('click', function () {
+      if (accordionDescr[i].style.display == 'block') {
+        accordionDescr[i].style.display = 'none';
+        accordionTitle[i].classList.remove('ui-accordion-header-active');
+      } else {
+        for (var k = 0; k < accordionTitle.length; k++) {
+          accordionDescr[k].style.display = 'none';
+          accordionTitle[k].classList.remove('ui-accordion-header-active');
+        }
+
+        accordionDescr[i].style.display = 'block';
+        accordionDescr[i].classList.add('fadeIn');
+        accordionTitle[i].classList.add('ui-accordion-header-active');
+      }
+    });
+  };
+
+  for (var i = 0; i < accordionTitle.length; i++) {
+    _loop(i);
+  }
+}
+
+module.exports = accordion;
+
+/***/ }),
+
 /***/ "./src/js/parts/burgerMenu.js":
 /*!************************************!*\
   !*** ./src/js/parts/burgerMenu.js ***!
@@ -366,13 +405,15 @@ window.addEventListener('DOMContentLoaded', function () {
       gift = __webpack_require__(/*! ./parts/gift.js */ "./src/js/parts/gift.js"),
       hoverPicture = __webpack_require__(/*! ./parts/hoverPicture.js */ "./src/js/parts/hoverPicture.js"),
       burgerMenu = __webpack_require__(/*! ./parts/burgerMenu.js */ "./src/js/parts/burgerMenu.js"),
-      more = __webpack_require__(/*! ./parts/more.js */ "./src/js/parts/more.js");
+      more = __webpack_require__(/*! ./parts/more.js */ "./src/js/parts/more.js"),
+      accordion = __webpack_require__(/*! ./parts/accordion.js */ "./src/js/parts/accordion.js");
 
   modal();
   gift();
   hoverPicture();
   burgerMenu();
   more();
+  accordion();
 }); // -> end scripts
 
 /***/ })
