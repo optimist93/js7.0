@@ -4,6 +4,7 @@ function gift(){
 		giftPopup = document.querySelector('.popup-gift');
 
 	function showGift() {
+		gift.style.display = 'none';
 		giftPopup.style.display = 'flex';
 		document.body.style.overflow = 'hidden';
 	}
@@ -11,7 +12,6 @@ function gift(){
 	function hideGift() {
 		giftPopup.style.display = 'none';
 		document.body.style.overflow = '';
-		gift.style.display = 'none';
 	}
 
 	function activeGift() {
