@@ -215,30 +215,96 @@ module.exports = accordion;
 function burgerMenu() {
   var burger = document.querySelector('.burger'),
       burgerMenu = document.querySelector('.burger-menu');
-
-  function activeMenuBurger() {
-    if (document.documentElement.clientWidth <= 768) {
-      console.log(1);
-      burgerMenu.removeAttribute('style');
-      burger.addEventListener('click', function () {
-        if (burgerMenu.style.display == 'block') {
-          burgerMenu.style.display = 'none';
-        } else {
-          burgerMenu.style.display = 'block';
-        }
-      });
+  burger.addEventListener('click', function () {
+    if (document.documentElement.clientWidth < 768) {
+      burgerMenu.classList.toggle('show');
     }
-  }
-
-  activeMenuBurger();
+  });
   window.addEventListener('resize', function () {
     if (document.documentElement.clientWidth > 768) {
-      burgerMenu.removeAttribute('style');
+      burgerMenu.classList.remove('show');
     }
   });
 }
 
 module.exports = burgerMenu;
+
+/***/ }),
+
+/***/ "./src/js/parts/filter.js":
+/*!********************************!*\
+  !*** ./src/js/parts/filter.js ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function filter() {
+  var menu = document.querySelector('.portfolio-menu'),
+      menuItem = document.querySelectorAll('.portfolio-menu li'),
+      portfolioBlock = document.querySelectorAll('.portfolio-block'),
+      noBlocks = document.querySelector('.portfolio-no');
+
+  function hidePortfolioBlock(k) {
+    for (var i = k; i < portfolioBlock.length; i++) {
+      portfolioBlock[i].classList.remove('all');
+      portfolioBlock[i].style.display = 'none';
+    }
+  }
+
+  function showAllBlock() {
+    for (var i = 0; i < portfolioBlock.length; i++) {
+      portfolioBlock[i].classList.add('all', 'portfolio-block');
+      portfolioBlock[i].style.display = 'block';
+    }
+  }
+
+  menu.addEventListener('click', function (event) {
+    var target = event.target;
+    console.log(target);
+    menuItem.forEach(function (item) {
+      item.classList.remove('active');
+    });
+    hidePortfolioBlock(0);
+    portfolioBlock.forEach(function (item) {
+      var filter = target.getAttribute('class');
+      console.log(filter);
+
+      if (!item.classList.contains(filter)) {
+        item.style.display = 'none';
+      } else if (target.classList.contains('all')) {
+        showAllBlock();
+      } else {
+        item.style.display = 'block';
+      } // item.classList.remove('portfolio-block');
+      // //target.classList.remove('active');
+      // if(target.getAttribute('class').slice('active', '') == item.getAttribute('class')){
+      // 	target.classList.add('active');
+      // 	item.classList.add('portfolio-block');
+      // 	item.style.display = 'block';
+      // }else if(target.classList.contains('all')){
+      // 	showAllBlock();
+      // }
+
+    }); // если нет работ
+
+    var k = 0;
+
+    for (var i = 0; i < portfolioBlock.length; i++) {
+      if (portfolioBlock[i].style.display == 'block') {
+        k++;
+        return k;
+      }
+    }
+
+    if (k == 0) {
+      noBlocks.style.display = 'block';
+    } else {
+      noBlocks.style.display = 'none';
+    }
+  });
+}
+
+module.exports = filter;
 
 /***/ }),
 
@@ -387,6 +453,47 @@ module.exports = more;
 
 /***/ }),
 
+/***/ "./src/js/parts/topSlider.js":
+/*!***********************************!*\
+  !*** ./src/js/parts/topSlider.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function topSlider() {
+  var slideIndex = 1,
+      slides = document.querySelectorAll('.main-slider-item');
+  showSlides(slideIndex);
+
+  function showSlides(n) {
+    if (n > slides.length) {
+      slideIndex = 1;
+    }
+
+    if (n < 1) {
+      slideIndex = slides.length;
+    }
+
+    for (var i = 0; i < slides.length; i++) {
+      slides[i].style.display = 'none';
+    }
+
+    slides[slideIndex - 1].style.display = 'block';
+  }
+
+  var show = setInterval(function () {
+    showSlides(slideIndex += 1);
+  }, 4000);
+
+  function currentSlide(n) {
+    showSlides(slideIndex = n);
+  }
+}
+
+module.exports = topSlider;
+
+/***/ }),
+
 /***/ "./src/js/scripts.js":
 /*!***************************!*\
   !*** ./src/js/scripts.js ***!
@@ -406,7 +513,9 @@ window.addEventListener('DOMContentLoaded', function () {
       hoverPicture = __webpack_require__(/*! ./parts/hoverPicture.js */ "./src/js/parts/hoverPicture.js"),
       burgerMenu = __webpack_require__(/*! ./parts/burgerMenu.js */ "./src/js/parts/burgerMenu.js"),
       more = __webpack_require__(/*! ./parts/more.js */ "./src/js/parts/more.js"),
-      accordion = __webpack_require__(/*! ./parts/accordion.js */ "./src/js/parts/accordion.js");
+      accordion = __webpack_require__(/*! ./parts/accordion.js */ "./src/js/parts/accordion.js"),
+      filter = __webpack_require__(/*! ./parts/filter.js */ "./src/js/parts/filter.js"),
+      topSlider = __webpack_require__(/*! ./parts/topSlider.js */ "./src/js/parts/topSlider.js");
 
   modal();
   gift();
@@ -414,6 +523,8 @@ window.addEventListener('DOMContentLoaded', function () {
   burgerMenu();
   more();
   accordion();
+  filter();
+  topSlider();
 }); // -> end scripts
 
 /***/ })

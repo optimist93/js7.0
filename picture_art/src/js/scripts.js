@@ -8,7 +8,9 @@ window.addEventListener('DOMContentLoaded', () => {
 		hoverPicture = require('./parts/hoverPicture.js'),
 		burgerMenu = require('./parts/burgerMenu.js'),
 		more = require('./parts/more.js'),
-		accordion = require('./parts/accordion.js');
+		accordion = require('./parts/accordion.js'),
+		filter = require('./parts/filter.js'),
+		topSlider = require('./parts/topSlider.js');
 
 	modal();
 	gift();
@@ -16,4 +18,6 @@ window.addEventListener('DOMContentLoaded', () => {
 	burgerMenu();
 	more();
 	accordion();
+	filter();
+	topSlider();
 }); // -> end scripts
