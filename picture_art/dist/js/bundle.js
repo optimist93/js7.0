@@ -205,6 +205,68 @@ module.exports = accordion;
 
 /***/ }),
 
+/***/ "./src/js/parts/bottomSlider.js":
+/*!**************************************!*\
+  !*** ./src/js/parts/bottomSlider.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function bottomSlider() {
+  var slideIndex = 1,
+      slides = document.querySelectorAll('.feedback-slider-item'),
+      prev = document.querySelector('.main-prev-btn'),
+      next = document.querySelector('.main-next-btn');
+  showSlides(slideIndex);
+
+  function showSlides(n) {
+    if (n > slides.length) {
+      // когда перелистываем последний слайд, возвращаемся на первый
+      slideIndex = 1;
+    }
+
+    if (n < 1) {
+      slideIndex = slides.length;
+    }
+
+    slides.forEach(function (item) {
+      item.style.display = 'none'; //item.classList.remove('fadeInLeft', 'fadeInRight');
+    });
+    slides[slideIndex - 1].style.display = 'block';
+  } // show slides
+
+
+  function plusSlides(n) {
+    showSlides(slideIndex += n);
+  }
+
+  function currentSlide(n) {
+    showSlides(slideIndex = n);
+  }
+
+  prev.addEventListener('click', function () {
+    plusSlides(-1);
+    slides[slideIndex - 1].classList.remove('animated', 'fadeInLeft');
+    slides[slideIndex - 1].classList.add('animated', 'fadeInRight');
+  });
+  next.addEventListener('click', function () {
+    plusSlides(1);
+    slides[slideIndex - 1].classList.remove('animated', 'fadeInRight');
+    slides[slideIndex - 1].classList.add('animated', 'fadeInLeft');
+  });
+  var autoSlider = setInterval(function () {
+    for (var i = 0; i < slides.length; i++) {
+      slides[i].classList.add('animated', 'fadeInRight');
+    }
+
+    showSlides(slideIndex += 1);
+  }, 5000);
+}
+
+module.exports = bottomSlider;
+
+/***/ }),
+
 /***/ "./src/js/parts/burgerMenu.js":
 /*!************************************!*\
   !*** ./src/js/parts/burgerMenu.js ***!
@@ -508,7 +570,8 @@ window.addEventListener('DOMContentLoaded', function () {
       more = __webpack_require__(/*! ./parts/more.js */ "./src/js/parts/more.js"),
       accordion = __webpack_require__(/*! ./parts/accordion.js */ "./src/js/parts/accordion.js"),
       filter = __webpack_require__(/*! ./parts/filter.js */ "./src/js/parts/filter.js"),
-      topSlider = __webpack_require__(/*! ./parts/topSlider.js */ "./src/js/parts/topSlider.js");
+      topSlider = __webpack_require__(/*! ./parts/topSlider.js */ "./src/js/parts/topSlider.js"),
+      bottomSlider = __webpack_require__(/*! ./parts/bottomSlider.js */ "./src/js/parts/bottomSlider.js");
 
   modal();
   gift();
@@ -518,6 +581,7 @@ window.addEventListener('DOMContentLoaded', function () {
   accordion();
   filter();
   topSlider();
+  bottomSlider();
 }); // -> end scripts
 
 /***/ })

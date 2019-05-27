@@ -10,7 +10,8 @@ window.addEventListener('DOMContentLoaded', () => {
 		more = require('./parts/more.js'),
 		accordion = require('./parts/accordion.js'),
 		filter = require('./parts/filter.js'),
-		topSlider = require('./parts/topSlider.js');
+		topSlider = require('./parts/topSlider.js'),
+		bottomSlider = require('./parts/bottomSlider.js');
 
 	modal();
 	gift();
@@ -20,4 +21,5 @@ window.addEventListener('DOMContentLoaded', () => {
 	accordion();
 	filter();
 	topSlider();
+	bottomSlider();
 }); // -> end scripts
