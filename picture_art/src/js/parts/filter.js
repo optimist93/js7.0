@@ -7,7 +7,7 @@ function filter(){
 
 	function hidePortfolioBlock(k){
 		for(let i = k; i < portfolioBlock.length; i++){
-			portfolioBlock[i].classList.remove('all');
+			portfolioBlock[i].classList.remove('all', 'portfolio-block');
 			portfolioBlock[i].style.display = 'none';
 		}
 	}
@@ -20,30 +20,23 @@ function filter(){
 
 	menu.addEventListener('click', (event)=> {
 		let target = event.target;
-		console.log(target);
 		menuItem.forEach((item)=>{
 			item.classList.remove('active');
+			if(item == target){
+				item.classList.add('active');
+			}
 		});
 		hidePortfolioBlock(0);
 		portfolioBlock.forEach(function(item){
-			let filter = target.getAttribute('class');
-			console.log(filter);
-			if(!item.classList.contains(filter)){
-				item.style.display = 'none';
-			}else if(target.classList.contains('all')){
-					showAllBlock();
-			}	else {
+			let filter = target.getAttribute('class'),
+				a = item.getAttribute('class');
+			
+			if(`${a} active` == filter){
 				item.style.display = 'block';
+				item.classList.add('portfolio-block');
+			}else if(filter == `all active`){
+					showAllBlock();
 			}
-			// item.classList.remove('portfolio-block');
-			// //target.classList.remove('active');
-			// if(target.getAttribute('class').slice('active', '') == item.getAttribute('class')){
-			// 	target.classList.add('active');
-			// 	item.classList.add('portfolio-block');
-			// 	item.style.display = 'block';
-			// }else if(target.classList.contains('all')){
-			// 	showAllBlock();
-			// }
 		});
 
 		// если нет работ

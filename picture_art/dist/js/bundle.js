@@ -246,7 +246,7 @@ function filter() {
 
   function hidePortfolioBlock(k) {
     for (var i = k; i < portfolioBlock.length; i++) {
-      portfolioBlock[i].classList.remove('all');
+      portfolioBlock[i].classList.remove('all', 'portfolio-block');
       portfolioBlock[i].style.display = 'none';
     }
   }
@@ -260,31 +260,24 @@ function filter() {
 
   menu.addEventListener('click', function (event) {
     var target = event.target;
-    console.log(target);
     menuItem.forEach(function (item) {
       item.classList.remove('active');
+
+      if (item == target) {
+        item.classList.add('active');
+      }
     });
     hidePortfolioBlock(0);
     portfolioBlock.forEach(function (item) {
-      var filter = target.getAttribute('class');
-      console.log(filter);
+      var filter = target.getAttribute('class'),
+          a = item.getAttribute('class');
 
-      if (!item.classList.contains(filter)) {
-        item.style.display = 'none';
-      } else if (target.classList.contains('all')) {
-        showAllBlock();
-      } else {
+      if ("".concat(a, " active") == filter) {
         item.style.display = 'block';
-      } // item.classList.remove('portfolio-block');
-      // //target.classList.remove('active');
-      // if(target.getAttribute('class').slice('active', '') == item.getAttribute('class')){
-      // 	target.classList.add('active');
-      // 	item.classList.add('portfolio-block');
-      // 	item.style.display = 'block';
-      // }else if(target.classList.contains('all')){
-      // 	showAllBlock();
-      // }
-
+        item.classList.add('portfolio-block');
+      } else if (filter == "all active") {
+        showAllBlock();
+      }
     }); // если нет работ
 
     var k = 0;
