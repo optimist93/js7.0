@@ -25,6 +25,7 @@ function gift(){
 	function showGift() {
 		gift.style.display = 'none';
 		giftPopup.style.display = 'flex';
+		giftPopup.style.zIndex = '1000001';
 		document.body.style.overflow = 'hidden';
 	}
 

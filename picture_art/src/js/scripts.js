@@ -11,7 +11,8 @@ window.addEventListener('DOMContentLoaded', () => {
 		accordion = require('./parts/accordion.js'),
 		filter = require('./parts/filter.js'),
 		topSlider = require('./parts/topSlider.js'),
-		bottomSlider = require('./parts/bottomSlider.js');
+		bottomSlider = require('./parts/bottomSlider.js'),
+		popupAfterMinute = require('./parts/popupAfterMinute.js');
 
 	modal();
 	gift();
@@ -22,4 +23,5 @@ window.addEventListener('DOMContentLoaded', () => {
 	filter();
 	topSlider();
 	bottomSlider();
+	popupAfterMinute();
 }); // -> end scripts

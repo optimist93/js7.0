@@ -396,6 +396,7 @@ function gift() {
   function showGift() {
     gift.style.display = 'none';
     giftPopup.style.display = 'flex';
+    giftPopup.style.zIndex = '1000001';
     document.body.style.overflow = 'hidden';
   }
 
@@ -527,6 +528,39 @@ module.exports = more;
 
 /***/ }),
 
+/***/ "./src/js/parts/popupAfterMinute.js":
+/*!******************************************!*\
+  !*** ./src/js/parts/popupAfterMinute.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function popupAfterMinute() {
+  var popup = document.querySelector('.popup-consultation'),
+      popupClose = document.querySelector('.popup-close'),
+      counter = 0;
+  window.addEventListener('click', function (event) {
+    var target = event.target;
+
+    if (target.classList.contains('popup-close') || target.classList.contains('popup-gift') || target.classList.contains('popup-design') || target.classList.contains('popup-consultation')) {
+      counter++;
+    }
+  });
+  var timer = setTimeout(function () {
+    if (counter > 0) {
+      clearInterval(timer);
+    } else {
+      popup.style.display = 'flex';
+      popup.style.zIndex = '1000001';
+      document.body.style.overflow = 'hidden';
+    }
+  }, 60000);
+}
+
+module.exports = popupAfterMinute;
+
+/***/ }),
+
 /***/ "./src/js/parts/topSlider.js":
 /*!***********************************!*\
   !*** ./src/js/parts/topSlider.js ***!
@@ -590,7 +624,8 @@ window.addEventListener('DOMContentLoaded', function () {
       accordion = __webpack_require__(/*! ./parts/accordion.js */ "./src/js/parts/accordion.js"),
       filter = __webpack_require__(/*! ./parts/filter.js */ "./src/js/parts/filter.js"),
       topSlider = __webpack_require__(/*! ./parts/topSlider.js */ "./src/js/parts/topSlider.js"),
-      bottomSlider = __webpack_require__(/*! ./parts/bottomSlider.js */ "./src/js/parts/bottomSlider.js");
+      bottomSlider = __webpack_require__(/*! ./parts/bottomSlider.js */ "./src/js/parts/bottomSlider.js"),
+      popupAfterMinute = __webpack_require__(/*! ./parts/popupAfterMinute.js */ "./src/js/parts/popupAfterMinute.js");
 
   modal();
   gift();
@@ -601,6 +636,7 @@ window.addEventListener('DOMContentLoaded', function () {
   filter();
   topSlider();
   bottomSlider();
+  popupAfterMinute();
 }); // -> end scripts
 
 /***/ })
