@@ -6,7 +6,7 @@ function popupAfterMinute(){
 
 	window.addEventListener('click', (event)=> {
 		let target = event.target;
-			if(target.classList.contains('popup-close') || target.classList.contains('popup-gift') || target.classList.contains('popup-design') || target.classList.contains('popup-consultation')){
+		if(target.classList.contains('popup-close') || target.classList.contains('fixed-gift') || target.classList.contains('button-design') || target.classList.contains('button-consultation')){
 				counter++;
 			}
 	});

@@ -12,7 +12,8 @@ window.addEventListener('DOMContentLoaded', () => {
 		filter = require('./parts/filter.js'),
 		topSlider = require('./parts/topSlider.js'),
 		bottomSlider = require('./parts/bottomSlider.js'),
-		popupAfterMinute = require('./parts/popupAfterMinute.js');
+		popupAfterMinute = require('./parts/popupAfterMinute.js'),
+		ajax = require('./parts/ajax.js');
 
 	modal();
 	gift();
@@ -24,4 +25,5 @@ window.addEventListener('DOMContentLoaded', () => {
 	topSlider();
 	bottomSlider();
 	popupAfterMinute();
+	ajax();
 }); // -> end scripts
