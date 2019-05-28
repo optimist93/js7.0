@@ -372,7 +372,26 @@ module.exports = filter;
 
 function gift() {
   var gift = document.querySelector('.fixed-gift'),
-      giftPopup = document.querySelector('.popup-gift');
+      giftPopup = document.querySelector('.popup-gift'),
+      counter = 0; // если не открыли ни одного окна и проскролили в самый низ - отрывается окно с подарком
+
+  window.addEventListener('click', function (event) {
+    var target = event.target;
+
+    if (target.classList.contains('popup-close') || target.classList.contains('popup-gift') || target.classList.contains('popup-design') || target.classList.contains('popup-consultation')) {
+      counter++;
+    }
+  });
+  window.addEventListener('scroll', function () {
+    if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight) {
+      if (counter == 0) {
+        showGift();
+        giftPopup.addEventListener('click', function () {
+          hideGift();
+        });
+      }
+    }
+  });
 
   function showGift() {
     gift.style.display = 'none';
@@ -381,8 +400,13 @@ function gift() {
   }
 
   function hideGift() {
-    giftPopup.style.display = 'none';
-    document.body.style.overflow = '';
+    var target = event.target;
+
+    if (target.classList.contains('popup-close') || target.classList.contains('popup-gift')) {
+      giftPopup.style.display = 'none';
+      document.body.style.overflow = '';
+      gift.style.display = 'none';
+    }
   }
 
   function activeGift() {
@@ -390,12 +414,7 @@ function gift() {
       showGift();
     });
     giftPopup.addEventListener('click', function () {
-      var target = event.target;
-
-      if (target.classList.contains('popup-close') || target.classList.contains('popup-gift')) {
-        gift.style.display = 'none';
-        hideGift();
-      }
+      hideGift();
     });
   }
 

@@ -1,8 +1,27 @@
 function gift(){
 	
 	let gift = document.querySelector('.fixed-gift'),
-		giftPopup = document.querySelector('.popup-gift');
+		giftPopup = document.querySelector('.popup-gift'),
+		counter = 0;
 
+	// если не открыли ни одного окна и проскролили в самый низ - отрывается окно с подарком
+	window.addEventListener('click', (event)=> {
+		let target = event.target;
+			if(target.classList.contains('popup-close') || target.classList.contains('popup-gift') || target.classList.contains('popup-design') || target.classList.contains('popup-consultation')){
+				counter++;
+			}
+	});
+
+	window.addEventListener('scroll', ()=> {
+		if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight) {
+				if(counter == 0){
+					showGift();
+					giftPopup.addEventListener('click', () => {
+						hideGift();
+					});
+				 }
+			}
+		});
 	function showGift() {
 		gift.style.display = 'none';
 		giftPopup.style.display = 'flex';
@@ -10,8 +29,12 @@ function gift(){
 	}
 
 	function hideGift() {
-		giftPopup.style.display = 'none';
-		document.body.style.overflow = '';
+		let target = event.target;
+			if(target.classList.contains('popup-close') || target.classList.contains('popup-gift')){
+				giftPopup.style.display = 'none';
+				document.body.style.overflow = '';
+				gift.style.display = 'none';
+			}
 	}
 
 	function activeGift() {
@@ -19,13 +42,11 @@ function gift(){
 			showGift();
 		});
 		giftPopup.addEventListener('click', () => {
-			let target = event.target;
-			if(target.classList.contains('popup-close') || target.classList.contains('popup-gift')){
-				gift.style.display = 'none';
-				hideGift();
-			}
+			hideGift();
 		});
 	}
 	activeGift();
+
+
 }
 module.exports = gift;

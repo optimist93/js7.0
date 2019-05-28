@@ -1,5 +1,5 @@
 function modal(){
-	
+
 	function showModal(modal) {
 		modal.style.display = 'flex';
 		modal.style.zIndex = '1000001';
@@ -28,7 +28,6 @@ function modal(){
 			});
 		}
 	} //activeModal
-	
 	activeModal('button-design', 'popup-design');
 	activeModal('button-consultation', 'popup-consultation');
 }
