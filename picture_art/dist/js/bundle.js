@@ -1818,6 +1818,68 @@ module.exports = burgerMenu;
 
 /***/ }),
 
+/***/ "./src/js/parts/calculator.js":
+/*!************************************!*\
+  !*** ./src/js/parts/calculator.js ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function calculator() {
+  var size = document.querySelector('#size'),
+      material = document.querySelector('#material'),
+      options = document.querySelector('#options'),
+      promo = document.querySelector('.promocode'),
+      price = document.querySelector('.calc-price'),
+      sizeVal = 0,
+      materialVal = 0,
+      optionsVal = 0,
+      total = 0;
+  size.addEventListener('input', function () {
+    sizeVal = +size.options[size.selectedIndex].value;
+    console.log(sizeVal);
+    calc();
+  });
+  material.addEventListener('input', function () {
+    materialVal = +material.options[material.selectedIndex].value;
+    console.log(materialVal);
+    calc();
+  });
+  options.addEventListener('input', function () {
+    optionsVal = +options.options[options.selectedIndex].value;
+    console.log(optionsVal);
+    calc();
+  });
+  promo.addEventListener('input', function () {
+    if (promo.value.trim() == 'IWANTPOPART') {
+      price.textContent = total * 0.7;
+    } else {
+      price.textContent = total;
+    }
+
+    if (sizeVal == 0 || materialVal == 0) {
+      price.textContent = 0;
+    }
+  });
+
+  function calc() {
+    total = sizeVal * materialVal + optionsVal;
+    price.textContent = total;
+
+    if (promo.value.trim() == 'IWANTPOPART') {
+      price.textContent = total * 0.7;
+    }
+
+    if (sizeVal == 0 || materialVal == 0) {
+      price.textContent = 0;
+    }
+  }
+}
+
+module.exports = calculator;
+
+/***/ }),
+
 /***/ "./src/js/parts/filter.js":
 /*!********************************!*\
   !*** ./src/js/parts/filter.js ***!
@@ -2151,7 +2213,8 @@ window.addEventListener('DOMContentLoaded', function () {
       topSlider = __webpack_require__(/*! ./parts/topSlider.js */ "./src/js/parts/topSlider.js"),
       bottomSlider = __webpack_require__(/*! ./parts/bottomSlider.js */ "./src/js/parts/bottomSlider.js"),
       popupAfterMinute = __webpack_require__(/*! ./parts/popupAfterMinute.js */ "./src/js/parts/popupAfterMinute.js"),
-      ajax = __webpack_require__(/*! ./parts/ajax.js */ "./src/js/parts/ajax.js");
+      ajax = __webpack_require__(/*! ./parts/ajax.js */ "./src/js/parts/ajax.js"),
+      calculator = __webpack_require__(/*! ./parts/calculator.js */ "./src/js/parts/calculator.js");
 
   modal();
   gift();
@@ -2164,6 +2227,7 @@ window.addEventListener('DOMContentLoaded', function () {
   bottomSlider();
   popupAfterMinute();
   ajax();
+  calculator();
 }); // -> end scripts
 
 /***/ })

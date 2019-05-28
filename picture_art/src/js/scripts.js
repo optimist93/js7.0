@@ -13,7 +13,8 @@ window.addEventListener('DOMContentLoaded', () => {
 		topSlider = require('./parts/topSlider.js'),
 		bottomSlider = require('./parts/bottomSlider.js'),
 		popupAfterMinute = require('./parts/popupAfterMinute.js'),
-		ajax = require('./parts/ajax.js');
+		ajax = require('./parts/ajax.js'),
+		calculator = require('./parts/calculator.js');
 
 	modal();
 	gift();
@@ -26,4 +27,5 @@ window.addEventListener('DOMContentLoaded', () => {
 	bottomSlider();
 	popupAfterMinute();
 	ajax();
+	calculator();
 }); // -> end scripts
