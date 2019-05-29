@@ -10,24 +10,24 @@ function calculator(){
 		optionsVal = 0,
 		total = 0;
 
-	size.addEventListener('input', ()=>{
+	size.addEventListener('change', ()=>{
 		sizeVal = +size.options[size.selectedIndex].value;
 		console.log(sizeVal);
 		calc();
 	});
 
-	material.addEventListener('input', ()=>{
+	material.addEventListener('change', ()=>{
 		materialVal = +material.options[material.selectedIndex].value;
 		console.log(materialVal);
 		calc();
 	});
-	options.addEventListener('input', ()=>{
+	options.addEventListener('change', ()=>{
 		optionsVal = +options.options[options.selectedIndex].value;
 		console.log(optionsVal);
 		calc();
 	});
 	
-	promo.addEventListener('input', ()=> {
+	promo.addEventListener('change', ()=> {
 		if(promo.value.trim() == 'IWANTPOPART'){
 			price.textContent = total*0.7;
 		}else {

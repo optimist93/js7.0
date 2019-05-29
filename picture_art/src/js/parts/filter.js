@@ -5,6 +5,8 @@ function filter(){
 		portfolioBlock = document.querySelectorAll('.portfolio-block'),
 		noBlocks = document.querySelector('.portfolio-no');
 
+		noBlocks.style.display = 'none';
+
 	function hidePortfolioBlock(k){
 		for(let i = k; i < portfolioBlock.length; i++){
 			portfolioBlock[i].classList.remove('all', 'portfolio-block');
@@ -44,6 +46,7 @@ function filter(){
 		for(let i = 0; i < portfolioBlock.length; i++){
 			if(portfolioBlock[i].style.display == 'block'){
 				k++;
+				noBlocks.style.display = 'none';
 				return k;
 			}
 			

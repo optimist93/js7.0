@@ -2,6 +2,7 @@ function bottomSlider(){
 
 	let slideIndex = 1,
 		slides = document.querySelectorAll('.feedback-slider-item'),
+		sliderWrap = document.querySelector('.feedback-slider'),
 		prev = document.querySelector('.main-prev-btn'),
 		next = document.querySelector('.main-next-btn');
 
@@ -40,12 +41,29 @@ function bottomSlider(){
 			slides[slideIndex - 1].classList.add('animated', 'fadeInLeft');
 		});
 
-		let autoSlider = setInterval(() => {
+		let autoSlider;
+		sliderWrap.addEventListener('mouseenter', stopSlider);
+		sliderWrap.addEventListener('mouseleave', startSlider);
+		function showSlide(){
 			for(let i = 0; i < slides.length; i++){
 				slides[i].classList.add('animated', 'fadeInRight');
 			}
 			showSlides(slideIndex += 1);
-		}, 5000);
+		}
+		//setInterval(showSlide, 5000);
+		function startSlider(){
+			autoSlider = setInterval(showSlide, 5000);
+		}
+		function stopSlider(){
+			clearInterval(autoSlider);
+		}
+		startSlider();
+			// let autoSlider = setInterval(() => {
+			// 	for(let i = 0; i < slides.length; i++){
+			// 		slides[i].classList.add('animated', 'fadeInRight');
+			// 	}
+			// 	showSlides(slideIndex += 1);
+			// }, 5000);
 
 }
 

@@ -1,8 +1,11 @@
 function topSlider(){
 
 	let slideIndex = 1,
-		slides = document.querySelectorAll('.main-slider-item');
+		sliderWrap = document.querySelector('.main-slider'),
+		slides = document.querySelectorAll('.main-slider-item'),
+		slidesImg = document.querySelectorAll('.main-slider-item img');
 
+	sliderWrap.style.overflow = 'hidden';
 	showSlides(slideIndex);
 
 	function showSlides(n){
@@ -16,6 +19,7 @@ function topSlider(){
 
 		for(let i = 0; i < slides.length; i++){
 			slides[i].style.display = 'none';
+			slidesImg[i].style.maxWidth = '100%';
 		}
 
 		slides[slideIndex - 1].style.display = 'block';

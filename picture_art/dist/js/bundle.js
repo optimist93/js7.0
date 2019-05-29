@@ -1606,7 +1606,7 @@ var _Promise = typeof Promise === 'undefined' ? __webpack_require__(/*! es6-prom
 function ajax() {
   var message = {
     loading: 'Загрузка...',
-    success: 'Спасибо за заявку',
+    success: '',
     failure: 'Что-то пошло не так...'
   };
   var consultationForm = document.querySelector('.popup-consultation form'),
@@ -1615,7 +1615,13 @@ function ajax() {
       inputPhone = document.querySelectorAll('input[type="tel"]'),
       inputName = document.querySelectorAll('input[name="name"]'),
       inputMessage = document.querySelectorAll('*[name="message"]'),
-      statusMessage = document.createElement('div'); //маска для телефона
+      popupThx = document.querySelector('.popup-thx'),
+      statusMessage = document.createElement('div');
+
+  function showThx() {
+    popupThx.style.display = 'block';
+  } //маска для телефона
+
 
   for (var i = 0; i < inputPhone.length; i++) {
     inputPhone[i].addEventListener('keydown', function (event) {
@@ -1709,7 +1715,8 @@ function ajax() {
       postData(formData).then(function () {
         return statusMessage.innerHTML = message.loading;
       }).then(function () {
-        statusMessage.innerHTML = message.success;
+        //statusMessage.innerHTML = message.success;
+        showTnx();
         setTimeout(function () {
           // удаляем сообщение об отправке через 5 секунд
           statusMessage.style.display = 'none';
@@ -1740,6 +1747,7 @@ module.exports = ajax;
 function bottomSlider() {
   var slideIndex = 1,
       slides = document.querySelectorAll('.feedback-slider-item'),
+      sliderWrap = document.querySelector('.feedback-slider'),
       prev = document.querySelector('.main-prev-btn'),
       next = document.querySelector('.main-next-btn');
   showSlides(slideIndex);
@@ -1779,13 +1787,33 @@ function bottomSlider() {
     slides[slideIndex - 1].classList.remove('animated', 'fadeInRight');
     slides[slideIndex - 1].classList.add('animated', 'fadeInLeft');
   });
-  var autoSlider = setInterval(function () {
+  var autoSlider;
+  sliderWrap.addEventListener('mouseenter', stopSlider);
+  sliderWrap.addEventListener('mouseleave', startSlider);
+
+  function showSlide() {
     for (var i = 0; i < slides.length; i++) {
       slides[i].classList.add('animated', 'fadeInRight');
     }
 
     showSlides(slideIndex += 1);
-  }, 5000);
+  } //setInterval(showSlide, 5000);
+
+
+  function startSlider() {
+    autoSlider = setInterval(showSlide, 5000);
+  }
+
+  function stopSlider() {
+    clearInterval(autoSlider);
+  }
+
+  startSlider(); // let autoSlider = setInterval(() => {
+  // 	for(let i = 0; i < slides.length; i++){
+  // 		slides[i].classList.add('animated', 'fadeInRight');
+  // 	}
+  // 	showSlides(slideIndex += 1);
+  // }, 5000);
 }
 
 module.exports = bottomSlider;
@@ -1835,22 +1863,22 @@ function calculator() {
       materialVal = 0,
       optionsVal = 0,
       total = 0;
-  size.addEventListener('input', function () {
+  size.addEventListener('change', function () {
     sizeVal = +size.options[size.selectedIndex].value;
     console.log(sizeVal);
     calc();
   });
-  material.addEventListener('input', function () {
+  material.addEventListener('change', function () {
     materialVal = +material.options[material.selectedIndex].value;
     console.log(materialVal);
     calc();
   });
-  options.addEventListener('input', function () {
+  options.addEventListener('change', function () {
     optionsVal = +options.options[options.selectedIndex].value;
     console.log(optionsVal);
     calc();
   });
-  promo.addEventListener('input', function () {
+  promo.addEventListener('change', function () {
     if (promo.value.trim() == 'IWANTPOPART') {
       price.textContent = total * 0.7;
     } else {
@@ -1892,6 +1920,7 @@ function filter() {
       menuItem = document.querySelectorAll('.portfolio-menu li'),
       portfolioBlock = document.querySelectorAll('.portfolio-block'),
       noBlocks = document.querySelector('.portfolio-no');
+  noBlocks.style.display = 'none';
 
   function hidePortfolioBlock(k) {
     for (var i = k; i < portfolioBlock.length; i++) {
@@ -1934,6 +1963,7 @@ function filter() {
     for (var i = 0; i < portfolioBlock.length; i++) {
       if (portfolioBlock[i].style.display == 'block') {
         k++;
+        noBlocks.style.display = 'none';
         return k;
       }
     }
@@ -2157,7 +2187,10 @@ module.exports = popupAfterMinute;
 
 function topSlider() {
   var slideIndex = 1,
-      slides = document.querySelectorAll('.main-slider-item');
+      sliderWrap = document.querySelector('.main-slider'),
+      slides = document.querySelectorAll('.main-slider-item'),
+      slidesImg = document.querySelectorAll('.main-slider-item img');
+  sliderWrap.style.overflow = 'hidden';
   showSlides(slideIndex);
 
   function showSlides(n) {
@@ -2171,6 +2204,7 @@ function topSlider() {
 
     for (var i = 0; i < slides.length; i++) {
       slides[i].style.display = 'none';
+      slidesImg[i].style.maxWidth = '100%';
     }
 
     slides[slideIndex - 1].style.display = 'block';
