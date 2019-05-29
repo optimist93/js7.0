@@ -1606,7 +1606,7 @@ var _Promise = typeof Promise === 'undefined' ? __webpack_require__(/*! es6-prom
 function ajax() {
   var message = {
     loading: 'Загрузка...',
-    success: '',
+    success: 'Ваша заявка отправлена',
     failure: 'Что-то пошло не так...'
   };
   var consultationForm = document.querySelector('.popup-consultation form'),
@@ -1615,13 +1615,7 @@ function ajax() {
       inputPhone = document.querySelectorAll('input[type="tel"]'),
       inputName = document.querySelectorAll('input[name="name"]'),
       inputMessage = document.querySelectorAll('*[name="message"]'),
-      popupThx = document.querySelector('.popup-thx'),
-      statusMessage = document.createElement('div');
-
-  function showThx() {
-    popupThx.style.display = 'block';
-  } //маска для телефона
-
+      statusMessage = document.createElement('div'); //маска для телефона
 
   for (var i = 0; i < inputPhone.length; i++) {
     inputPhone[i].addEventListener('keydown', function (event) {
@@ -1669,7 +1663,7 @@ function ajax() {
   function sendForm(elem) {
     elem.addEventListener('submit', function (event) {
       event.preventDefault();
-      elem.appendChild(statusMessage);
+      elem.style.display = 'block';
       var input = elem.getElementsByTagName('input'),
           textarea = elem.getElementsByTagName('textarea');
       var formData = new FormData(elem);
@@ -1710,17 +1704,20 @@ function ajax() {
         if (elem.contains(textarea[0]) === true) {
           textarea[0].value = '';
         }
+
+        for (var _i2 = 0; _i2 < elem.children.length; _i2++) {
+          elem.children[_i2].style.display = 'none';
+        }
+
+        elem.appendChild(statusMessage);
       }
 
       postData(formData).then(function () {
         return statusMessage.innerHTML = message.loading;
       }).then(function () {
-        //statusMessage.innerHTML = message.success;
-        showTnx();
-        setTimeout(function () {
-          // удаляем сообщение об отправке через 5 секунд
-          statusMessage.style.display = 'none';
-        }, 5000);
+        statusMessage.innerHTML = message.success; // setTimeout(()=> { // удаляем сообщение об отправке через 5 секунд
+        // 	statusMessage.style.display = 'none';
+        // }, 5000);
       }).catch(function () {
         return statusMessage.innerHTML = message.failure;
       }).then(clearInput);

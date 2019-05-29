@@ -1,7 +1,7 @@
 function ajax(){
 	let message = {
 		loading: 'Загрузка...',
-		success: '',
+		success: 'Ваша заявка отправлена',
 		failure: 'Что-то пошло не так...'
 	};
 	let consultationForm = document.querySelector('.popup-consultation form'),
@@ -10,12 +10,7 @@ function ajax(){
 		inputPhone = document.querySelectorAll('input[type="tel"]'),
 		inputName = document.querySelectorAll('input[name="name"]'),
 		inputMessage = document.querySelectorAll('*[name="message"]'),
-		popupThx = document.querySelector('.popup-thx'),
 		statusMessage = document.createElement('div');
-
-	function showThx(){
-		popupThx.style.display = 'block';
-	}
 
 	//маска для телефона
 	for(let i = 0; i < inputPhone.length; i++){
@@ -57,7 +52,8 @@ function ajax(){
 	function sendForm(elem) {
 		elem.addEventListener('submit', (event) => {
 			event.preventDefault();
-			elem.appendChild(statusMessage);
+			elem.style.display = 'block';
+			
 			let input = elem.getElementsByTagName('input'),
 				textarea = elem.getElementsByTagName('textarea');
 			let formData = new FormData(elem);
@@ -101,16 +97,20 @@ function ajax(){
 				if(elem.contains(textarea[0]) === true){
 					textarea[0].value = '';
 				}
+				for(let i = 0; i < elem.children.length; i++){
+					elem.children[i].style.display = 'none';
+
+				}
+				elem.appendChild(statusMessage);
 			}
 			
 			postData(formData)
 				.then(()=> statusMessage.innerHTML = message.loading)
 				.then(()=> {
-					//statusMessage.innerHTML = message.success;
-					showTnx();
-					setTimeout(()=> { // удаляем сообщение об отправке через 5 секунд
-						statusMessage.style.display = 'none';
-					}, 5000);
+					statusMessage.innerHTML = message.success;
+					// setTimeout(()=> { // удаляем сообщение об отправке через 5 секунд
+					// 	statusMessage.style.display = 'none';
+					// }, 5000);
 				})
 				.catch(()=> statusMessage.innerHTML = message.failure)
 				.then(clearInput);
@@ -120,5 +120,4 @@ function ajax(){
 	sendForm(designForm);
 	sendForm(bottomForm);
 }
-
 module.exports = ajax;
